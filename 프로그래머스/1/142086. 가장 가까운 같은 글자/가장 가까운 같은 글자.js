@@ -1,14 +1,14 @@
 function solution(s) {
     var answer = [];
-    const obj = {};
+    const map = new Map();
     [...s].forEach((item, index) => {
-        if(!obj.hasOwnProperty(item)){
-            obj[item] = index;
+        if(!map.has(item)){
+            map.set(item, index);
             answer.push(-1);
         } else {
-            const priorIndex = obj[item];
+            const priorIndex = map.get(item);
             const indexDiff = index - priorIndex;
-            obj[item] = index;
+            map.set(item, index);
             answer.push(indexDiff);
         }
     })
