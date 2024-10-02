@@ -1,16 +1,32 @@
 function solution(s) {
-    var answer = [];
-    const map = new Map();
-    [...s].forEach((item, index) => {
-        if(!map.has(item)){
-            map.set(item, index);
-            answer.push(-1);
-        } else {
-            const priorIndex = map.get(item);
-            const indexDiff = index - priorIndex;
-            map.set(item, index);
-            answer.push(indexDiff);
+    let answer = [...s];
+    let setArr = [...new Set([...s])];
+    setArr.forEach((item) => {
+        let first = s.indexOf(item);
+      answer = answer.map((itemInside, index)=>{
+          if(itemInside === item){
+              if(index === first){
+                  return -1;
+              }
+              return index - getLatest([...s], item, index);
+          }
+          return itemInside;
+          // banana
+      }
+          
+      )  
+    })
+    
+    return answer;
+}
+
+function getLatest(arr, item, index){
+    // [b,a,n,a,n,a]
+    let indexArr = [];
+    arr.forEach((itemInside, indexInside) => {
+        if(item === itemInside){
+            indexArr.push(indexInside);
         }
     })
-    return answer;
+    return Math.max(...indexArr.filter(item => item < index));
 }
