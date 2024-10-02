@@ -1,7 +1,3 @@
 function solution(money) {
-    const americanoCost = 5500;
-    const leftover = money % americanoCost;
-    const americanoCount = (money - leftover) / americanoCost;
-
-    return [americanoCount, leftover];
+    return [Math.floor(money / 5500), money % 5500];
 }
