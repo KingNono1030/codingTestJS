@@ -1,27 +1,19 @@
 function solution(players, callings) {
-    const copiedPlayers = [...players];
-    const oderMap = new Map();
-    const playerMap = new Map();
-    players.forEach((player, index) => {
-        oderMap.set(player, index);
-        playerMap.set(index, player);        
+    
+    const playersIndex = new Map();
+    players.forEach((player, index ) => {
+        playersIndex.set(player,index);
     });
     
-    callings.forEach(call => {
-        const targetIndex = oderMap.get(call);
-        const chasedIndex = targetIndex - 1;
+    callings.forEach((player) => { 
+        const index = playersIndex.get(player);
+        const prevPlayer = players[index-1];
         
-        const chasedPlayer = playerMap.get(chasedIndex);
+        [players[index-1], players[index]] = [players[index], players[index-1]];
         
-        oderMap.set(chasedPlayer, targetIndex);
-        oderMap.set(call, chasedIndex);
-        
-        playerMap.set(targetIndex, chasedPlayer);
-        playerMap.set(chasedIndex, call);
-    });
-    var answer = [];
-    for (const key of playerMap.keys()) {
-        answer.push(playerMap.get(key));
-    }
-    return answer;
+        playersIndex.set(player, index-1);
+        playersIndex.set(prevPlayer, index);
+    })
+    return players;
 }
+
