@@ -1,18 +1,14 @@
 function solution(elements) {
-    const memo = {};
-    const length = elements.length;
-    for(let i = 0; i < length; i++){
-        let value = elements[i]
-        memo[value] = true
-        for(let j = 1; j < length - 1; j++){
-            value += elements[getRemainder(length, i + j)];
-            memo[value] = true;
+    
+    const set = new Set();
+    
+    for(let i = 0; i < elements.length; i++){
+        let sum = 0;
+        for(let j = 0; j < elements.length; j++){
+            const at = (i + j) % elements.length;
+            sum += elements[at];
+            set.add(sum);
         }
     }
-    const answer = Object.keys(memo).length;
-    return answer + 1;
-}
-
-function getRemainder(length, i){
-    return i % length
+    return set.size;
 }
