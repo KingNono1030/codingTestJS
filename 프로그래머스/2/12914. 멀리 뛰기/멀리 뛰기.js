@@ -1,7 +1,9 @@
-function solution(n, memo={}) {
-    if(n <= 1) return 1
-    if(memo[n])return memo[n]
-
-    memo[n] = (solution(n - 1, memo) + solution(n - 2, memo)) % 1234567;
-    return memo[n]
+function solution(n) {
+    const fibo = [1, 1];
+    
+    for (let i = 2; i <= n; i++) {
+        fibo[i] = (fibo[i - 1] + fibo[i - 2]) % 1234567;
+    }
+    
+    return fibo[n];
 }
