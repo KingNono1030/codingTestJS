@@ -16,8 +16,3 @@ function solution(s) {
     }
     return answer;
 }
-
-// 첫 문자 -> 대문자
-// 나머지 문자 -> 소문자
-// 숫자 -> 변경 X
-// 공백 -> 변경 X
