@@ -1,18 +1,19 @@
-function solution(s){   
-    const leftParen = '(';
-    const rightParen = ')';
+function solution(s){    
+    const left = '(';
+    const right = ')';
     
-    if(s[s.length - 1] === leftParen) return false;
+    let leftCount = 0;
+    let rightCount = 0;
     
-    const stack =[];
+    if(s[s.length - 1] === left) return false;
     for(const paren of s){
-        if(paren === leftParen){
-            stack.push(paren);
-        } else {
-            const popped = stack.pop();
-            if(popped === undefined) return false;
+        if(paren === left){
+            leftCount++;
+        } else if(paren === right){
+            rightCount++;
+            if(leftCount - rightCount < 0) return false;
         }
     }
     
-    return stack.length ? false : true;
+    return leftCount === rightCount;
 }
